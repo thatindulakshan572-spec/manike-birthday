@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy 15th Birthday My Manike ❤️</title>
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, rgba(131, 24, 67, 0.8), rgba(44, 12, 29, 0.9)), url('photo.jpg') !important;
+      background-size: cover !important;
+      background-position: center !important;
+      background-repeat: no-repeat !important;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+      padding: 20px;
+    }
+
+    /* Floating Happiness & Hearts Background Animation */
+    .floating-item {
+      position: absolute;
+      bottom: -60px;
+      animation: floatUpItems linear infinite;
+      z-index: 1;
+      opacity: 0.85;
+      font-weight: bold;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    @keyframes floatUpItems {
+      0% {
+        transform: translateY(0) translateX(0) scale(0.8) rotate(0deg);
+        opacity: 0.9;
+      }
+      50% {
+        transform: translateY(-55vh) translateX(40px) scale(1.2) rotate(15deg);
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(-110vh) translateX(-30px) scale(0.9) rotate(-15deg);
+        opacity: 0;
+      }
+    }
+
+    /* Main Container Card */
+    .card {
+      background: rgba(255, 240, 245, 0.96);
+      backdrop-filter: blur(20px);
+      max-width: 550px;
+      width: 100%;
+      border-radius: 35px;
+      padding: 35px 25px;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(131, 24, 67, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.8);
+      z-index: 10;
+      border: 4px solid rgba(255, 105, 180, 0.6);
+      animation: fadeIn 0.8s ease-in-out;
+      position: relative;
+      margin: 20px 0;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* CAKE & CANDLES SECTION */
+    .cake-section h2 {
+      color: #881337;
+      font-size: 2rem;
+      margin-bottom: 8px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .cake-section p {
+      color: #9f1239;
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .cake-container {
+      position: relative;
+      margin: 20px auto;
+      width: 220px;
+      height: 160px;
+    }
+
+    .candles-row {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: -5px;
+    }
+
+    .candle {
+      position: relative;
+      width: 14px;
+      height: 45px;
+      background: linear-gradient(to right, #fb7185, #e11d48, #be123c);
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .candle:hover {
+      transform: scale(1.1);
+    }
+
+    .flame {
+      position: absolute;
+      top: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 24px;
+      background: radial-gradient(circle, #fde047 30%, #f97316 70%, #ef4444 100%);
+      border-radius: 50% 50% 20% 20%;
+      box-shadow: 0 0 12px #fde047, 0 0 20px #f97316;
+      animation: flicker 0.6s infinite alternate;
+      cursor: pointer;
+    }
+
+    .flame.extinguished {
+      display: none;
+    }
+
+    @keyframes flicker {
+      0% { transform: translateX(-50%) scale(1) rotate(-3deg); opacity: 0.9; }
+      100% { transform: translateX(-50%) scale(1.15) rotate(3deg); opacity: 1; }
+    }
+
+    .cake-tier {
+      background: linear-gradient(135deg, #f43f5e, #fda4af);
+      border-radius: 15px 15px 10px 10px;
+      box-shadow: 0 8px 15px rgba(131, 24, 67, 0.3);
+      position: relative;
+    }
+
+    .cake-tier-1 {
+      width: 180px;
+      height: 50px;
+      margin: 0 auto;
+      border-top: 6px solid #fff;
+    }
+
+    .cake-tier-2 {
+      width: 220px;
+      height: 65px;
+      margin: -5px auto 0 auto;
+      border-top: 6px solid #fff;
+    }
+
+    .instruction-hint {
+      margin-top: 15px;
+      font-size: 0.9rem;
+      color: #e11d48;
+      font-weight: bold;
+      animation: pulseText 1.5s infinite;
+    }
+
+    @keyframes pulseText {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* Birthday Section */
+    .birthday-section {
+      display: none;
+    }
+
+    .profile-img-container {
+      position: relative;
+      width: 135px;
+      height: 135px;
+      margin: 0 auto 15px auto;
+    }
+
+    .profile-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #e11d48;
+      box-shadow: 0 8px 25px rgba(225, 29, 72, 0.4);
+    }
+
+    .birthday-section h1 {
+      color: #be123c;
+      font-size: 1.8rem;
+      margin-bottom: 5px;
+      font-weight: 800;
+    }
+
+    .subtitle {
+      color: #9f1239;
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    /* AGE BADGE */
+    .age-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #f43f5e, #fb7185);
+      color: white;
+      padding: 5px 16px;
+      border-radius: 20px;
+      font-size: 0.88rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 12px rgba(244, 63, 94, 0.3);
+    }
+
+    /* ENVELOPE DESIGN */
+    .envelope-wrapper {
+      background: linear-gradient(135deg, #e11d48 0%, #fb7185 100%);
+      padding: 16px;
+      border-radius: 18px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(225, 29, 72, 0.4);
+      transition: all 0.3s ease;
+      margin-top: 10px;
+      text-align: center;
+      color: white;
+    }
+
+    .envelope-wrapper:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 25px rgba(225, 29, 72, 0.6);
+    }
+
+    .envelope-wrapper i {
+      font-size: 2rem;
+      margin-bottom: 6px;
+      animation: bounce 1.5s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .envelope-wrapper h3 {
+      font-size: 1.1rem;
+      margin-bottom: 3px;
+    }
+
+    .envelope-wrapper p {
+      font-size: 0.8rem;
+      opacity: 0.95;
+    }
+
+    /* OPENED LETTER STYLING */
+    .message-box {
+      background: #ffffff;
+      border: 2px dashed #e11d48;
+      padding: 16px;
+      border-radius: 16px;
+      text-align: left;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: #500;
+      margin-top: 15px;
+      display: none;
+      max-height: 250px;
+      overflow-y: auto;
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    .message-box p {
+      margin-bottom: 10px;
+    }
+
+    .signature-text {
+      margin-top: 12px;
+      text-align: center;
+      font-weight: bold;
+      color: #be123c;
+      font-size: 0.9rem;
+    }
+
+    /* SONG QUOTE BOX */
+    .song-quote {
+      background: #fff1f2;
+      border-left: 3px solid #e11d48;
+      padding: 8px 12px;
+      margin: 10px 0;
+      font-style: italic;
+      font-size: 0.85rem;
+      color: #9f1239;
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* LOVE REASONS SECTION */
+    .reasons-container {
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .reasons-title {
+      color: #881337;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .reason-card {
+      background: #fff1f2;
+      border-left: 4px solid #e11d48;
+      padding: 10px 14px;
+      margin-bottom: 8px;
+      border-radius: 0 12px 12px 0;
+      font-size: 0.85rem;
+      color: #9f1239;
+      font-weight: 500;
+      box-shadow: 0 2px 5px rgba(225, 29, 72, 0.1);
+      transition: transform 0.2s;
+    }
+
+    .reason-card:hover {
+      transform: translateX(3px);
+    }
+
+    /* DEVELOPER CREDIT */
+    .developer-credit {
+      margin-top: 18px;
+      font-size: 0.72rem;
+      color: #881337;
+      opacity: 0.8;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Floating Happiness & Hearts Container -->
+  <div id="floating-container"></div>
+
+  <!-- Background Romantic Audio -->
+  <audio id="bgMusic" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-tenderness.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="card">
+    
+    <!-- STEP 1: CAKE & 3 CANDLES SECTION -->
+    <div id="cakeSection" class="cake-section">
+      <h2>🎂 Happy 15th Birthday My Manike! 💖</h2>
+      <p>Blow out all 3 candles to reveal your surprise!</p>
+      
+      <div class="cake-container">
+        <!-- Candles with Flames -->
+        <div class="candles-row">
+          <div class="candle" onclick="extinguishCandle(1)">
+            <div class="flame" id="flame1"></div>
+          </div>
+          <div class="candle" onclick="extinguishCandle(2)">
+            <div class="flame" id="flame2"></div>
+          </div>
+          <div class="candle" onclick="extinguishCandle(3)">
+            <div class="flame" id="flame3"></div>
+          </div>
+        </div>
+        <!-- Cake Tiers -->
+        <div class="cake-tier cake-tier-1"></div>
+        <div class="cake-tier cake-tier-2"></div>
+      </div>
+
+      <div class="instruction-hint" id="candleHint">👆 Click on the candles to blow them out! (<span id="blownCount">0</span>/3)</div>
+    </div>
+
+    <!-- STEP 2: BIRTHDAY SURPRISE SECTION -->
+    <div id="birthdaySection" class="birthday-section">
+      
+      <div class="profile-img-container">
+        <!-- Profile Photo -->
+        <img src="photo.jpg" 
+             alt="My Manike" 
+             class="profile-img" 
+             onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=300&auto=format&fit=crop'">
+      </div>
+      
+      <h1>Happy 15th Birthday, My Manike! 🎂💖</h1>
+      <div class="age-badge"><i class="fa-solid fa-heart"></i> Turning Sweet 15 Today! <i class="fa-solid fa-heart"></i></div>
+      <p class="subtitle">Wishing you a magical birthday, my sweetheart! ✨</p>
+
+      <!-- Envelope Clickable Box -->
+      <div class="envelope-wrapper" onclick="openEnvelope()">
+        <i class="fa-solid fa-envelope-open-text"></i>
+        <h3>Open Your Birthday Letter 💌</h3>
+        <p>Click here to read my heart-felt message for you...</p>
+      </div>
+
+      <!-- Full Love Letter Box -->
+      <div class="message-box" id="loveLetter">
+        <p>🎀❤️ <b>HAPPY 15TH BIRTHDAY MY LOVE!</b> ❤️🎀</p>
+        
+        <div class="song-quote">
+          🎵 "Darling, just hold my hand, be my girl, I'll be your man... You look perfect tonight." 🎶
+        </div>
+
+        <p>My dearest Manike, today you turn 15, and you grow more beautiful and precious to me with every passing day. From the bottom of my heart, I wish that every single moment of your life is filled with pure happiness. 🥺💗</p>
+        <p>I still remember the day I first met you. That day became one of my absolute favourite memories. ❤️</p>
+        <p>We faced problems and there were times our hearts got hurt. But in the middle of all that, I am so glad that we are still holding on together. 🫶🏻</p>
+        <p>You are not just someone in my life. You are the one who makes my entire world so much more beautiful.</p>
+        <p>Even a short moment of talking with you means the world to me. I love seeing your precious smile and seeing you happy. 😘</p>
+        <p>Your smile makes my days brighter, and your happiness means everything to me. 💕</p>
+        <p>I pray that we can meet up soon and create countless beautiful memories together. I am eagerly waiting for that day to come, my gem. 🥹</p>
+        <p>I wish I could be right beside you today, hold your soft hands and tell you in person how deeply special you are to me. ❤️</p>
+        <p>Manike, you hold such an irreplaceable place in my heart. The love I have for you goes far beyond words.</p>
+        <p>I don't need a fairytale love story. I just want all my beautiful memories with you. 💗</p>
+        <p>I love you so much, my Manike. I want you to be happy always. May all your sweet dreams come true on your 15th birthday! 🥺❤️</p>
+        <p>You are my happiness, my favourite person, and my sweetest blessing.</p>
+        <div class="signature-text">
+          I LOVE YOU SO MUCH, MY MANIKA! 💋<br>
+          YOU WILL ALWAYS BE SPECIAL TO ME! ❤️<br><br>
+          🎂💗 HAPPY 15TH BIRTHDAY ONCE AGAIN, MY SWEETHEART! 💗🎂
+        </div>
+      </div>
+
+      <!-- Love Reasons Section -->
+      <div class="reasons-container">
+        <div class="reasons-title">💖 Why I Love You So Much 💖</div>
+        <div class="reason-card">✨ 1. Because you are the precious pushi girl who made my life so beautiful.</div>
+        <div class="reason-card">✨ 2. Because you have such a kind and pure heart.</div>
+        <div class="reason-card">✨ 3. Because your pure love gives me peace and true happiness.</div>
+        <div class="reason-card">✨ 4. Because every moment spent with you is a sweet blessing to me.</div>
+      </div>
+
+    </div>
+
+    <!-- Developed By Footer -->
+    <div class="developer-credit">
+      Developed with ❤️ by Tharindu
+    </div>
+
+  </div>
+
+  <script>
+    // Create Floating Happiness & Hearts Background
+    function createFloatingItems() {
+      const container = document.getElementById('floating-container');
+      const items = ['Happiness 💖', '✨ Happiness ✨', '❤️', '💖', 'My Happiness 🌸', '✨', '💕', 'Happiness 🫶🏻'];
+      const colors = ['#ff8da1', '#ffb6c1', '#ffffff', '#ff69b4', '#ffa07a'];
+      
+      for (let i = 0; i < 35; i++) {
+        const div = document.createElement('div');
+        div.classList.add('floating-item');
+        
+        div.innerHTML = items[Math.floor(Math.random() * items.length)];
+        div.style.left = Math.random() * 100 + 'vw';
+        div.style.color = colors[Math.floor(Math.random() * colors.length)];
+        div.style.fontSize = (Math.random() * 8 + 14) + 'px';
+        div.style.animationDuration = (Math.random() * 5 + 4) + 's';
+        div.style.animationDelay = Math.random() * 5 + 's';
+        
+        container.appendChild(div);
+      }
+    }
+    createFloatingItems();
+
+    // Candle Extinguishing Logic & Play Audio
+    let extinguishedCount = 0;
+
+    function extinguishCandle(candleNum) {
+      const flame = document.getElementById('flame' + candleNum);
+      if (!flame.classList.contains('extinguished')) {
+        flame.classList.add('extinguished');
+        extinguishedCount++;
+        document.getElementById('blownCount').innerText = extinguishedCount;
+
+        // Small confetti puff for each candle blown
+        confetti({
+          particleCount: 40,
+          spread: 50,
+          origin: { y: 0.6 }
+        });
+
+        // If all 3 candles are blown out, unlock the main birthday section automatically!
+        if (extinguishedCount === 3) {
+          // Play Background Romantic Music
+          const music = document.getElementById('bgMusic');
+          music.volume = 0.5;
+          music.play().catch(error => console.log("Audio play blocked by browser:", error));
+
+          setTimeout(() => {
+            document.getElementById('cakeSection').style.display = 'none';
+            document.getElementById('birthdaySection').style.display = 'block';
+
+            // Grand Confetti!
+            confetti({
+              particleCount: 220,
+              spread: 100,
+              origin: { y: 0.6 }
+            });
+          }, 600);
+        }
+      }
+    }
+
+    // Open Envelope & Reveal Letter
+    function openEnvelope() {
+      document.querySelector('.envelope-wrapper').style.display = 'none';
+      document.getElementById('loveLetter').style.display = 'block';
+      
+      confetti({
+        particleCount: 150,
+        spread: 80,
+        origin: { y: 0.6 }
+      });
+    }
+  </script>
+</body>
+</html>
